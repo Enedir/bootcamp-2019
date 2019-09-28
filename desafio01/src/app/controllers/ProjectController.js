@@ -1,14 +1,23 @@
 import * as Yup from 'yup';
 
 import Project from '../models/Project';
+import Task from '../models/Task';
 
 class ProjectController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
     const projects = await Project.findAll({
+      attributes: ['id', 'title'],
       limit: 20,
       offset: (page - 1) * 20,
+      include: [
+        {
+          model: Task,
+          as: 'tasks',
+          attributes: ['title'],
+        },
+      ],
     });
 
     return res.json(projects);

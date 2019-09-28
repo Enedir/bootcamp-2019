@@ -1,13 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Project extends Model {
+class Task extends Model {
   static init(sequelize) {
     super.init(
       {
-        id: {
-          type: Sequelize.UUID,
-          primaryKey: true,
-        },
         title: Sequelize.STRING,
       },
       {
@@ -19,8 +15,8 @@ class Project extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Task, { foreignKey: 'project_id', as: 'tasks' });
+    this.belongsTo(models.Project, { foreignKey: 'project_id', as: 'project' });
   }
 }
 
-export default Project;
+export default Task;
