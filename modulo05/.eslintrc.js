@@ -22,7 +22,8 @@ module.exports = {
   },
   plugins: [
     'react',
-    'prettier'
+    'prettier',
+    '@babel/plugin-proposal-class-properties'
   ],
   rules: {
     'prettier/prettier': 'error',
