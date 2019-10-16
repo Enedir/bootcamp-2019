@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  desafio02-api:
+    build: .
+    container_name: desafio02-api
+    volumes:
+      - .:/home/jura/Projetos/git.rocketseat/desafio02
+      - /home/jura/Projetos/git.rocketseat/desafio02/node_modules
+    ports:
+      - '3333:3333'
+    depends_on:
+      - desafio02-postgres
+    networks:
+      - desafio02-network
+  desafio02-postgres:
+    image: postgres
+    container_name: desafio02-postgres
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - desafio02-postgres-data:/data
+    ports:
+      - "5432:5432"
+    networks:
+      - desafio02-network
+
+volumes:
+  desafio02-postgres-data:
+
+networks:
+  desafio02-network:
+    driver: bridge
