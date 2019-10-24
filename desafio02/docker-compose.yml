@@ -13,7 +13,7 @@ services:
       - desafio02-postgres
     networks:
       - desafio02-network
-    command: sh -c "yarn sequelize db:migrate && yarn start"
+    command: sh /home/jura/Projetos/git.rocketseat/desafio02/start-enviroment.sh
   desafio02-postgres:
     image: postgres
     container_name: desafio02-postgres
