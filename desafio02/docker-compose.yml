@@ -13,18 +13,20 @@ services:
       - desafio02-postgres
     networks:
       - desafio02-network
+    command: sh -c "yarn sequelize db:migrate && yarn start"
   desafio02-postgres:
     image: postgres
     container_name: desafio02-postgres
     environment:
+      POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - desafio02-postgres-data:/data
     ports:
       - "5432:5432"
     networks:
       - desafio02-network
-
 volumes:
   desafio02-postgres-data:
 
